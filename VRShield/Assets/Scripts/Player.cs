@@ -34,6 +34,13 @@ public class Player : MonoBehaviour
             m_shield.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
         else
             m_shield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
+
+    #if UNITY_EDITOR
+        Vector3 rot = transform.rotation.eulerAngles;
+        rot.y += Input.GetAxis("Mouse X") * 10f;
+        rot.x -= Input.GetAxis("Mouse Y") * 5f;
+        transform.rotation = Quaternion.Euler(rot);
+    #endif
     }
 
     /// <summary>

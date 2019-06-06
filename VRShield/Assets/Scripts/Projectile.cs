@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float m_speed = 10f;
+    public float m_speed = 60f;
+    public float m_speedIncreaseWhenParried = 60f;
 
     private GameObject m_projectileOwner;
     private Player m_player;
     private Vector3 m_v3TargetDirection;
     private bool m_bIsFiring = false;
+    private Rigidbody m_rb;
 
     void Awake()
     {
+        m_rb = GetComponent<Rigidbody>();
         m_player = FindObjectOfType<Player>();
     }
 
@@ -21,7 +24,7 @@ public class Projectile : MonoBehaviour
         if (!m_bIsFiring)
             return;
 
-        transform.position += m_v3TargetDirection * m_speed * Time.deltaTime;
+        m_rb.velocity = m_v3TargetDirection * m_speed * Time.deltaTime;
     }
 
     /// <summary>
@@ -37,6 +40,9 @@ public class Projectile : MonoBehaviour
     {
         // set direction
         m_v3TargetDirection = (v3TargetPosition - transform.position).normalized;
+        // start in front of enemy so it doesn't collide
+        if (projectileOwner.CompareTag("Enemy"))
+            transform.position += m_v3TargetDirection * projectileOwner.transform.localScale.z;
         // set projectile owner
         m_projectileOwner = projectileOwner;
         // rotate to face target
@@ -58,6 +64,8 @@ public class Projectile : MonoBehaviour
             {
                 // reset parry cooldown
                 m_player.ResetParryCooldown();
+                // increase speed
+                m_speed += m_speedIncreaseWhenParried;
                 // return to sender
                 Fire(m_projectileOwner.transform.position, Camera.main.gameObject);
             }
@@ -71,6 +79,7 @@ public class Projectile : MonoBehaviour
         {
             // kill/damage enemy
             Destroy(collision.gameObject); // temp
+            Destroy(gameObject);
         }
     }
 }

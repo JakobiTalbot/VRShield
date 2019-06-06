@@ -6,12 +6,13 @@ public class Enemy : MonoBehaviour
 {
     public GameObject m_projectilePrefab;
 
+    public float m_firstShootTime = 2.0f;
     public float m_shootTime = 10.0f;
     public float m_timer;
 
     void Start()
     {
-        m_timer = m_shootTime;
+        m_timer = m_firstShootTime;
     }
 
     void Update()
