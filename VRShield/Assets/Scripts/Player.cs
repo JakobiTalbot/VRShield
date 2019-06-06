@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     // cooldown between being able to parry
     public float m_parryCooldown = 2f;
     // stores a reference to the shield object
-    public GameObject m_shield;
+    public GameObject m_physicsShield;
+    public GameObject m_fakeShield;
 
     // timer until the parry runs out
     private float m_fParryTimer = 0f;
@@ -24,23 +25,26 @@ public class Player : MonoBehaviour
         m_fParryCooldownTimer -= Time.deltaTime;
 
         // parry
-        if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger)
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)
             && m_fParryCooldownTimer <= 0f)
         {
             m_fParryTimer = m_parryTime;
             m_fParryCooldownTimer = m_parryCooldown;
         }
         if (m_fParryTimer > 0f)
-            m_shield.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
+            m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
         else
-            m_shield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
+            m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
 
-    #if UNITY_EDITOR
-        Vector3 rot = transform.rotation.eulerAngles;
-        rot.y += Input.GetAxis("Mouse X") * 10f;
-        rot.x -= Input.GetAxis("Mouse Y") * 5f;
-        transform.rotation = Quaternion.Euler(rot);
-    #endif
+        #if UNITY_EDITOR
+            Vector3 rot = transform.rotation.eulerAngles;
+            rot.y += Input.GetAxis("Mouse X") * 10f;
+            rot.x -= Input.GetAxis("Mouse Y") * 5f;
+            transform.rotation = Quaternion.Euler(rot);
+        #endif
+
+        m_physicsShield.GetComponent<Rigidbody>().MovePosition(m_fakeShield.transform.position);
+        m_physicsShield.GetComponent<Rigidbody>().MoveRotation(m_fakeShield.transform.rotation);
     }
 
     /// <summary>
