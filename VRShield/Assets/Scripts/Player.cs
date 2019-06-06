@@ -36,12 +36,16 @@ public class Player : MonoBehaviour
             m_shield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
     }
 
-    /*  @brief Resets the parry cooldown timer to 0
-    */
+    /// <summary>
+    /// Resets the parry cooldown timer to 0
+    /// </summary>
     public void ResetParryCooldown() => m_fParryCooldownTimer = 0f;
 
-    /*  @brief Returns the parry state of the player's shield
-        @return Whether the shield should parry or not
-    */
+    /// <summary>
+    /// Returns the parry state of the player's shield
+    /// </summary>
+    /// <returns>
+    /// Whether the shield should parry or not
+    /// </returns>
     public bool IsParrying() => m_fParryTimer > 0f;
 }

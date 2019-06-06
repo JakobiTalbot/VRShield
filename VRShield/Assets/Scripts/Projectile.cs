@@ -24,9 +24,15 @@ public class Projectile : MonoBehaviour
         transform.position += m_v3TargetDirection * m_speed * Time.deltaTime;
     }
 
-    /*  @brief Sets the direction and rotation for the projectile to fire at
-     *  @param The target for the bullet to fire at
-    */
+    /// <summary>
+    /// Sets the direction and rotation for the projectile to fire at
+    /// </summary>
+    /// <param name="v3TargetPosition">
+    /// The target for the bullet to fire at
+    /// </param>
+    /// <param name="projectileOwner">
+    /// The gameobject that fired the bullet
+    /// </param>
     public void Fire(Vector3 v3TargetPosition, GameObject projectileOwner)
     {
         // set direction
@@ -41,6 +47,9 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject == m_projectileOwner)
+            return;
+
         // if projectile hits shield
         if (collision.gameObject.CompareTag("Shield"))
         {
@@ -61,6 +70,7 @@ public class Projectile : MonoBehaviour
         else if (collision.gameObject.CompareTag("Enemy"))
         {
             // kill/damage enemy
+            Destroy(collision.gameObject); // temp
         }
     }
 }
