@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnTimer: 5
+  m_spawnMinMaxHeight: {x: -1, y: 3}
   m_spawnRadius: 5
   m_enemyPrefab: {fileID: 6870377426679320522, guid: 2fb35203ab5704d4db7e81902b509cc7,
     type: 3}

@@ -21,10 +21,8 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!m_bIsFiring)
-            return;
-
-        m_rb.velocity = m_v3TargetDirection * m_speed * Time.deltaTime;
+        if (m_bIsFiring)
+            m_rb.velocity = m_v3TargetDirection * m_speed * Time.deltaTime;
     }
 
     /// <summary>
@@ -71,8 +69,9 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                // destroy projectile
-                Destroy(gameObject);
+                m_rb.constraints = RigidbodyConstraints.None;
+                m_bIsFiring = false;
+                Destroy(gameObject, 5f);
             }
         }
         else if (collision.gameObject.CompareTag("Enemy"))
