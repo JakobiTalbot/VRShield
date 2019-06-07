@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     public float m_speed = 60f;
     public float m_speedIncreaseWhenParried = 60f;
     public float m_timeToDestroyAfterBlocked = 2f;
-    public GameObject m_hitParticle;
+    public GameObject m_hitParticlePrefab;
 
     private GameObject m_projectileOwner;
     private Player m_player;
@@ -28,6 +28,10 @@ public class Projectile : MonoBehaviour
             m_rb.velocity = m_v3TargetDirection * m_speed * Time.deltaTime;
         else if (m_bIsHoming)
             m_rb.velocity += (m_projectileOwner.transform.position - transform.position).normalized * (m_speed / 8f) * Time.deltaTime;
+
+        // in case other projectile kills owner
+        if (!m_projectileOwner)
+            Destroy(gameObject);
     }
 
     /// <summary>
@@ -56,41 +60,63 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == m_projectileOwner
-            && !m_bIsHoming)
+        // ignore collision to other projectiles
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
+            return;
+        }
+        if (m_bIsHoming
+            && !collision.gameObject.CompareTag("Enemy"))
             return;
 
         m_bIsFiring = false;
         // if projectile hits shield
         if (collision.gameObject.CompareTag("Shield"))
         {
-            // artificial velocity
-            m_rb.AddForce(collision.GetContact(0).normal * (FindObjectOfType<Player>().m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude));
-            // if shield is parrying
-            if (m_player.IsParrying())
-            {
-                // reset parry cooldown
-                m_player.ResetParryCooldown();
-                m_bIsHoming = true;
-            }
-            else // if shield is hit and not parrying
-            {
-                m_rb.constraints = RigidbodyConstraints.None;
-                Destroy(gameObject, m_timeToDestroyAfterBlocked);
-            }
-            // the lord giveth, but he also taketh
-            Destroy(Instantiate(m_hitParticle, collision.GetContact(0).point, Quaternion.Euler(Vector3.zero)), 1f);
+            CollideShield(collision);
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            // kill/damage enemy
-            Destroy(collision.gameObject); // temp
-            Destroy(gameObject);
+            CollideEnemy(collision);
         }
         else if (collision.gameObject.CompareTag("Player")
                  && m_bIsHoming == false)
         {
-            Destroy(gameObject);
+            CollidePlayer(collision);
         }
+    }
+
+    private void CollideShield(Collision collision)
+    {
+        // artificial velocity
+        m_rb.AddForce(collision.GetContact(0).normal * (FindObjectOfType<Player>().m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude));
+        // if shield is parrying
+        if (m_player.IsParrying())
+        {
+            // reset parry cooldown
+            m_player.ResetParryCooldown();
+            m_bIsHoming = true;
+            GetComponent<ParticleSystem>().Play();
+        }
+        else // if shield is hit and not parrying
+        {
+            m_rb.constraints = RigidbodyConstraints.None;
+            Destroy(gameObject, m_timeToDestroyAfterBlocked);
+        }
+        // the lord giveth, but he also taketh away
+        Destroy(Instantiate(m_hitParticlePrefab, collision.GetContact(0).point, Quaternion.Euler(Vector3.zero)), 1f);
+    }
+
+    private void CollideEnemy(Collision collision)
+    {
+        // kill/damage enemy
+        Destroy(collision.gameObject); // temp
+        Destroy(gameObject);
+    }
+
+    private void CollidePlayer(Collision collision)
+    {
+        Destroy(gameObject);
     }
 }
