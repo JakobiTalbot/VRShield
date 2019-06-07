@@ -110,7 +110,9 @@ MonoBehaviour:
   m_speed: 60
   m_speedIncreaseWhenParried: 60
   m_timeToDestroyAfterBlocked: 2
-  m_hitParticle: {fileID: 6923920892220670304, guid: cd5a421802967f24892b6e533fe70b3b,
+  m_hitParticlePrefab: {fileID: 6923920892220670304, guid: cd5a421802967f24892b6e533fe70b3b,
+    type: 3}
+  m_explodeEnemyParticlePrefab: {fileID: 180128, guid: 6586ff0f14125534cae2f5d8f04b7871,
     type: 3}
 --- !u!54 &9153208513728059153
 Rigidbody:

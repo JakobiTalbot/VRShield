@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject m_projectilePrefab;
-    public GameObject m_deathParticlePrefab;
 
     public float m_firstShootTime = 2.0f;
     public float m_shootTime = 10.0f;
@@ -33,7 +32,6 @@ public class Enemy : MonoBehaviour
     }
     private void OnDestroy()
     {
-        Destroy(Instantiate(m_deathParticlePrefab, transform.position, Quaternion.Euler(Vector3.zero)), 2f);
         GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<Radar>().RemoveEnemy(this.gameObject);
     }
 }

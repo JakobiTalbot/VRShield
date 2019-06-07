@@ -6,9 +6,9 @@ public class Radar : MonoBehaviour
 {
     public GameObject m_radarUI;
 
-    //EnemySpawner m_enemySpawner;
+    public GameObject m_player;
 
-    List<GameObject> m_enemies;
+    public List<GameObject> m_enemies;
     public List<GameObject> m_enemyUITokens;
 
     public GameObject m_enemyUITokenPrefab;
@@ -28,9 +28,13 @@ public class Radar : MonoBehaviour
 
     private void Update()
     {
+        m_radarUI.transform.rotation = Quaternion.Euler(m_radarUI.transform.rotation.eulerAngles.x, m_radarUI.transform.rotation.eulerAngles.y, m_player.transform.rotation.eulerAngles.y);
+
         for(int i = 0; i < m_enemyUITokens.Count; i++)
         {
-            m_enemyUITokens[i].transform.position = m_enemies[i].transform.position * m_radarUI.transform.lossyScale.x;
+            //m_enemyUITokens[i].transform.position = new Vector3(m_enemies[i].transform.position.x * (m_radarUI.transform.lossyScale.x * 0.5f), m_enemies[i].transform.position.z * (m_radarUI.transform.lossyScale.z * 0.5f), 0).normalized;
+            m_enemyUITokens[i].transform.localPosition = new Vector3(m_enemies[i].transform.position.normalized.x * 0.5f, m_enemies[i].transform.position.normalized.z * 0.5f , 0.0f);  //m_enemies[i].transform.position.normalized * m_radarUI.transform.lossyScale.x;
+            
         }
     }
 }
