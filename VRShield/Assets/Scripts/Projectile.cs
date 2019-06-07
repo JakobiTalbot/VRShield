@@ -7,8 +7,11 @@ public class Projectile : MonoBehaviour
     public float m_speed = 60f;
     public float m_speedIncreaseWhenParried = 60f;
     public float m_timeToDestroyAfterBlocked = 2f;
+    public int m_scoreForKillingEnemy = 100;
+    public int m_scoreForHittingProjectile = 50;
     public GameObject m_hitParticlePrefab;
     public GameObject m_explodeEnemyParticlePrefab;
+    public GameObject m_scoreGainPopupPrefab;
 
     private GameObject m_projectileOwner;
     private Player m_player;
@@ -16,9 +19,11 @@ public class Projectile : MonoBehaviour
     private bool m_bIsFiring = false;
     private bool m_bIsHoming = false;
     private Rigidbody m_rb;
+    private ScoreManager m_scoreManager;
 
     void Awake()
     {
+        m_scoreManager = FindObjectOfType<ScoreManager>();
         m_rb = GetComponent<Rigidbody>();
         m_player = FindObjectOfType<Player>();
     }
@@ -67,8 +72,13 @@ public class Projectile : MonoBehaviour
             Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
             return;
         }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            CollideEnemy(collision);
+            return;
+        }
         if (m_bIsHoming
-            && !collision.gameObject.CompareTag("Enemy"))
+            || !m_bIsFiring)
             return;
 
         m_bIsFiring = false;
@@ -76,10 +86,6 @@ public class Projectile : MonoBehaviour
         if (collision.gameObject.CompareTag("Shield"))
         {
             CollideShield(collision);
-        }
-        else if (collision.gameObject.CompareTag("Enemy"))
-        {
-            CollideEnemy(collision);
         }
         else if (collision.gameObject.CompareTag("Player")
                  && m_bIsHoming == false)
@@ -90,8 +96,13 @@ public class Projectile : MonoBehaviour
 
     private void CollideShield(Collision collision)
     {
+        float fForce = (FindObjectOfType<Player>().m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude);
         // artificial velocity
-        m_rb.AddForce(collision.GetContact(0).normal * (FindObjectOfType<Player>().m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude));
+        m_rb.AddForce(collision.GetContact(0).normal * fForce);
+        // add score
+        m_scoreManager.AddScore(m_scoreForHittingProjectile + (int)fForce);
+        // the lord giveth, but he also taketh away
+        Destroy(Instantiate(m_hitParticlePrefab, collision.GetContact(0).point, Quaternion.Euler(Vector3.zero)), 1f);
         // if shield is parrying
         if (m_player.IsParrying())
         {
@@ -105,20 +116,26 @@ public class Projectile : MonoBehaviour
             m_rb.constraints = RigidbodyConstraints.None;
             Destroy(gameObject, m_timeToDestroyAfterBlocked);
         }
-        // the lord giveth, but he also taketh away
-        Destroy(Instantiate(m_hitParticlePrefab, collision.GetContact(0).point, Quaternion.Euler(Vector3.zero)), 1f);
     }
 
     private void CollideEnemy(Collision collision)
     {
+        // add score
+        m_scoreManager.AddScore(m_scoreForKillingEnemy);
+        m_scoreManager.IncrementMultiplier();
+        Destroy(Instantiate(m_explodeEnemyParticlePrefab, collision.transform.position, Quaternion.Euler(Vector3.zero)), 2f);
+        GameObject popup = Instantiate(m_scoreGainPopupPrefab, collision.transform.position, Quaternion.Euler(Vector3.zero));
+        popup.GetComponent<ScoreGainText>().SetText((m_scoreForKillingEnemy * m_scoreManager.GetMultiplier()).ToString());
+        popup.transform.LookAt(m_player.transform);
         // kill/damage enemy
         Destroy(collision.gameObject); // temp
         Destroy(gameObject);
-        Destroy(Instantiate(m_explodeEnemyParticlePrefab, collision.transform.position, Quaternion.Euler(Vector3.zero)), 2f);
     }
 
     private void CollidePlayer(Collision collision)
     {
+        m_scoreManager.ResetMultiplier();
+        // dmg player in future
         Destroy(gameObject);
     }
 }
