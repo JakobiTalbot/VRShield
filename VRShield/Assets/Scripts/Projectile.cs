@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float m_speedIncreaseWhenParried = 60f;
     public float m_timeToDestroyAfterBlocked = 2f;
     public GameObject m_hitParticlePrefab;
+    public GameObject m_explodeEnemyParticlePrefab;
 
     private GameObject m_projectileOwner;
     private Player m_player;
@@ -113,6 +114,7 @@ public class Projectile : MonoBehaviour
         // kill/damage enemy
         Destroy(collision.gameObject); // temp
         Destroy(gameObject);
+        Destroy(Instantiate(m_explodeEnemyParticlePrefab, collision.transform.position, Quaternion.Euler(Vector3.zero)), 2f);
     }
 
     private void CollidePlayer(Collision collision)
