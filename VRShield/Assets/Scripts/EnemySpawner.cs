@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Radar))]
 public class EnemySpawner : MonoBehaviour
 {
     public float m_spawnTimer = 3.0f;       //the time between enemy spawns
+
+    public Radar m_radar;
 
     public Vector2 m_spawnMinMaxHeight;     //the min and max height of the spawns
     public float m_spawnRadius;     //the radius at which the enemies spawn
@@ -15,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         m_timer = m_spawnTimer;     //set spawn time
+        m_radar = GetComponent<Radar>();
     }
 
     private void Update()
@@ -35,5 +39,7 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject temp = Instantiate(m_enemyPrefab);       //creates enemy
         temp.transform.position = spawnLoc;     //puts enemy into position
+
+        m_radar.AddEnemy(temp);
     }
 }

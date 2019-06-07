@@ -31,9 +31,9 @@ public class Enemy : MonoBehaviour
         GameObject projectile = Instantiate(m_projectilePrefab, transform.position, Quaternion.Euler(Vector3.zero));
         projectile.GetComponent<Projectile>().Fire(Camera.main.transform.position ,this.gameObject);
     }
-
     private void OnDestroy()
     {
         Destroy(Instantiate(m_deathParticlePrefab, transform.position, Quaternion.Euler(Vector3.zero)), 2f);
+        GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<Radar>().RemoveEnemy(this.gameObject);
     }
 }
