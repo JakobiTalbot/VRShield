@@ -24,6 +24,7 @@ public class Radar : MonoBehaviour
     public void RemoveEnemy(GameObject enemy)
     {
         m_enemies.Remove(enemy);
+        Destroy(m_enemyUITokens[m_enemyUITokens.Count - 1]);
         m_enemyUITokens.RemoveAt(m_enemyUITokens.Count - 1);
     }
 
