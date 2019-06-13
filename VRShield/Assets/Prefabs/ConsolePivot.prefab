@@ -47,6 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_lerpSpeed: 0.02
   m_mainCamera: {fileID: 0}
+  m_immediateChildren:
+  - {fileID: 8245691605958479877}
+  - {fileID: 8245691605005149892}
 --- !u!1 &8245691605005149891
 GameObject:
   m_ObjectHideFlags: 0

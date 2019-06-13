@@ -11,11 +11,18 @@ public class Player : MonoBehaviour
     // stores a reference to the shield object
     public GameObject m_physicsShield;
     public GameObject m_fakeShield;
+    public AudioClip[] m_audioClips;
 
     // timer until the parry runs out
     private float m_fParryTimer = 0f;
     // timer until player can parry again
     private float m_fParryCooldownTimer = 0f;
+    private AudioSource m_audioSource;
+
+    private void Awake()
+    {
+        m_audioSource = m_physicsShield.GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -51,5 +58,15 @@ public class Player : MonoBehaviour
     /// <returns>
     /// Whether the shield should parry or not
     /// </returns>
-    public bool IsParrying() => m_fParryTimer > 0f;
+    public bool IsParrying()
+    {
+        return m_fParryTimer > 0f;
+    }
+
+    public void PlayHitSound(float fSwingForce)
+    {
+        m_audioSource.pitch = Random.Range(0.8f, 1.2f);
+        m_audioSource.volume = fSwingForce;
+        m_audioSource.PlayOneShot(m_audioClips[Random.Range(0, m_audioClips.Length)]);
+    }
 }

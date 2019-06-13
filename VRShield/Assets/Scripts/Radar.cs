@@ -6,12 +6,12 @@ public class Radar : MonoBehaviour
 {
     public GameObject m_radarUI;
 
-    public GameObject m_player;
-
     public List<GameObject> m_enemies;
     public List<GameObject> m_enemyUITokens;
 
     public GameObject m_enemyUITokenPrefab;
+
+    public GameObject m_pivotPoint;
 
     public void AddEnemy(GameObject enemy)
     {
@@ -30,7 +30,7 @@ public class Radar : MonoBehaviour
 
     private void Update()
     {
-        m_radarUI.transform.rotation = Quaternion.Euler(m_radarUI.transform.rotation.eulerAngles.x, m_radarUI.transform.rotation.eulerAngles.y, m_player.transform.rotation.eulerAngles.y);
+        m_radarUI.transform.rotation = Quaternion.Euler(m_radarUI.transform.rotation.eulerAngles.x, m_radarUI.transform.rotation.eulerAngles.y, m_pivotPoint.transform.rotation.eulerAngles.y);
 
         for(int i = 0; i < m_enemyUITokens.Count; i++)
         {

@@ -96,13 +96,17 @@ public class Projectile : MonoBehaviour
 
     private void CollideShield(Collision collision)
     {
-        float fForce = (FindObjectOfType<Player>().m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude);
+        Player player = FindObjectOfType<Player>();
+        float fForce = (player.m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude);
         // artificial velocity
         m_rb.AddForce(collision.GetContact(0).normal * fForce);
         // add score
         m_scoreManager.AddScore(m_scoreForHittingProjectile + (int)fForce);
         // the lord giveth, but he also taketh away
         Destroy(Instantiate(m_hitParticlePrefab, collision.GetContact(0).point, Quaternion.Euler(Vector3.zero)), 1f);
+        // play hit sound
+        // TODO: set volume based on swing force
+        player.PlayHitSound(fForce / 50f);
         // if shield is parrying
         if (m_player.IsParrying())
         {

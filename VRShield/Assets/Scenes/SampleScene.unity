@@ -340,6 +340,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8245691604955785648}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2043190529 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8245691604935855320, guid: c3b608adfb28cf240bebe1724eebe385,
+    type: 3}
+  m_PrefabInstance: {fileID: 8245691604955785648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2077957711
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +521,11 @@ PrefabInstance:
       propertyPath: m_player
       value: 
       objectReference: {fileID: 208888525}
+    - target: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
+        type: 3}
+      propertyPath: m_pivotPoint
+      value: 
+      objectReference: {fileID: 2043190529}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57001ca5a08c4084ab6f17de9ab95c30, type: 3}
 --- !u!1001 &1772313265044694629
@@ -585,9 +596,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 186312592, guid: 921b97a5029636442b1c280a050761b2, type: 3}
+      propertyPath: m_audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 186312592, guid: 921b97a5029636442b1c280a050761b2, type: 3}
       propertyPath: m_physicsShield
       value: 
       objectReference: {fileID: 1646193902}
+    - target: {fileID: 186312592, guid: 921b97a5029636442b1c280a050761b2, type: 3}
+      propertyPath: m_audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b1fc22c48e36b74c8026c9bd8e636f6, type: 3}
+    - target: {fileID: 186312592, guid: 921b97a5029636442b1c280a050761b2, type: 3}
+      propertyPath: m_audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ab3154a42b30f145ba3caca8e464ca2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 921b97a5029636442b1c280a050761b2, type: 3}
 --- !u!1001 &2239095179868796051
@@ -736,10 +759,5 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1113264743}
-    - target: {fileID: 8245691605159023476, guid: c3b608adfb28cf240bebe1724eebe385,
-        type: 3}
-      propertyPath: m_Text
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b608adfb28cf240bebe1724eebe385, type: 3}
