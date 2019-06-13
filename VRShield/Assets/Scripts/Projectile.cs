@@ -30,14 +30,14 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // in case other projectile kills owner
+        if (!m_projectileOwner)
+            Destroy(gameObject);
+
         if (m_bIsFiring)
             m_rb.velocity = m_v3TargetDirection * m_speed * Time.deltaTime;
         else if (m_bIsHoming)
             m_rb.velocity += (m_projectileOwner.transform.position - transform.position).normalized * (m_speed / 8f) * Time.deltaTime;
-
-        // in case other projectile kills owner
-        if (!m_projectileOwner)
-            Destroy(gameObject);
     }
 
     /// <summary>
@@ -120,13 +120,13 @@ public class Projectile : MonoBehaviour
 
     private void CollideEnemy(Collision collision)
     {
-        // add score
-        m_scoreManager.AddScore(m_scoreForKillingEnemy);
-        m_scoreManager.IncrementMultiplier();
         Destroy(Instantiate(m_explodeEnemyParticlePrefab, collision.transform.position, Quaternion.Euler(Vector3.zero)), 2f);
         GameObject popup = Instantiate(m_scoreGainPopupPrefab, collision.transform.position, Quaternion.Euler(Vector3.zero));
         popup.GetComponent<ScoreGainText>().SetText((m_scoreForKillingEnemy * m_scoreManager.GetMultiplier()).ToString());
         popup.transform.LookAt(m_player.transform);
+        // add score
+        m_scoreManager.AddScore(m_scoreForKillingEnemy);
+        m_scoreManager.IncrementMultiplier();
         // kill/damage enemy
         Destroy(collision.gameObject); // temp
         Destroy(gameObject);
