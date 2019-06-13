@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     }
     private void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<Radar>().RemoveEnemy(this.gameObject);
+        Radar r = FindObjectOfType<Radar>();
+        if (r)
+            r.RemoveEnemy(gameObject);
     }
 }

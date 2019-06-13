@@ -36,13 +36,6 @@ public class Player : MonoBehaviour
         else
             m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
 
-        #if UNITY_EDITOR
-            Vector3 rot = transform.rotation.eulerAngles;
-            rot.y += Input.GetAxis("Mouse X") * 10f;
-            rot.x -= Input.GetAxis("Mouse Y") * 5f;
-            transform.rotation = Quaternion.Euler(rot);
-        #endif
-
         m_physicsShield.GetComponent<Rigidbody>().MovePosition(m_fakeShield.transform.position);
         m_physicsShield.GetComponent<Rigidbody>().MoveRotation(m_fakeShield.transform.rotation);
     }
