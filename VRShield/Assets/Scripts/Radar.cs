@@ -24,6 +24,7 @@ public class Radar : MonoBehaviour
     public void RemoveEnemy(GameObject enemy)
     {
         m_enemies.Remove(enemy);
+        m_enemyUITokens.RemoveAt(m_enemyUITokens.Count - 1);
     }
 
     private void Update()
@@ -33,7 +34,7 @@ public class Radar : MonoBehaviour
         for(int i = 0; i < m_enemyUITokens.Count; i++)
         {
             //m_enemyUITokens[i].transform.position = new Vector3(m_enemies[i].transform.position.x * (m_radarUI.transform.lossyScale.x * 0.5f), m_enemies[i].transform.position.z * (m_radarUI.transform.lossyScale.z * 0.5f), 0).normalized;
-            m_enemyUITokens[i].transform.localPosition = new Vector3(m_enemies[i].transform.position.normalized.x * 0.5f, m_enemies[i].transform.position.normalized.z * 0.5f , 0.0f);  //m_enemies[i].transform.position.normalized * m_radarUI.transform.lossyScale.x;
+            m_enemyUITokens[i].transform.localPosition = new Vector3(m_enemies[i].transform.position.normalized.x * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, m_enemies[i].transform.position.normalized.z * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f , 0.0f);  //m_enemies[i].transform.position.normalized * m_radarUI.transform.lossyScale.x;
             
         }
     }
