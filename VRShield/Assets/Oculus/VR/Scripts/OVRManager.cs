@@ -1420,7 +1420,6 @@ public class OVRManager : MonoBehaviour
 		{
 			try
 			{
-				Debug.Log("[OVRManager] InputFocusLost event");
 				if (InputFocusLost != null)
 					InputFocusLost();
 			}
@@ -1664,40 +1663,6 @@ public class OVRManager : MonoBehaviour
 	private void FixedUpdate()
 	{
 		OVRInput.FixedUpdate();
-	}
-
-	private void OnDestroy()
-	{
-		Debug.Log("[OVRManager] OnDestroy");
-	}
-
-	private void OnApplicationPause(bool pause)
-	{
-		if (pause)
-		{
-			Debug.Log("[OVRManager] OnApplicationPause(true)");
-		}
-		else
-		{
-			Debug.Log("[OVRManager] OnApplicationPause(false)");
-		}
-	}
-
-	private void OnApplicationFocus(bool focus)
-	{
-		if (focus)
-		{
-			Debug.Log("[OVRManager] OnApplicationFocus(true)");
-		}
-		else
-		{
-			Debug.Log("[OVRManager] OnApplicationFocus(false)");
-		}
-	}
-
-	private void OnApplicationQuit()
-	{
-		Debug.Log("[OVRManager] OnApplicationQuit");
 	}
 
 	#endregion // Unity Messages

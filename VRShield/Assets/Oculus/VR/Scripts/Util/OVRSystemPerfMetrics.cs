@@ -195,8 +195,6 @@ public class OVRSystemPerfMetrics
 			tcpServer.StopListening();
 
 			singleton = null;
-
-			Debug.Log("[OVRSystemPerfMetricsTcpServer] server destroyed");
 		}
 
 		private void Update()
