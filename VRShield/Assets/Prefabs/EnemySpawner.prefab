@@ -63,5 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_radarUI: {fileID: 0}
+  m_enemies: []
   m_enemyUITokens: []
-  m_enemyUITokenPrefab: {fileID: 0}
+  m_enemyUITokenPrefab: {fileID: 8436075773352065534, guid: bf0a11c819dda3d4cac7a8c1c71f0bb8,
+    type: 3}
+  m_pivotPoint: {fileID: 0}

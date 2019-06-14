@@ -28,29 +28,46 @@ public class MainMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(m_hand.transform.position, m_hand.transform.forward, out m_lastHit, m_maxRaycastDistance)
-            && OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        if (Physics.Raycast(m_hand.transform.position, m_hand.transform.forward, out m_lastHit, m_maxRaycastDistance))
         {
-            m_lineRenderer.startColor = m_buttonDownStartColor;
-            m_lineRenderer.endColor = m_buttonDownEndColor;
-
-            // if raycast hits UI
-            if (m_lastHit.collider.gameObject.layer == LayerMask.NameToLayer("UI"))
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
             {
-                // press button
-                BaseEventData baseEvent = new BaseEventData(EventSystem.current);
-                ExecuteEvents.Execute(m_lastHit.collider.gameObject, baseEvent, ExecuteEvents.submitHandler);
+                m_lineRenderer.startColor = m_buttonDownStartColor;
+                m_lineRenderer.endColor = m_buttonDownEndColor;
+
+                // if raycast hits UI
+                if (m_lastHit.collider.gameObject.layer == LayerMask.NameToLayer("UI"))
+                {
+                    // press button
+                    BaseEventData baseEvent = new BaseEventData(EventSystem.current);
+                    ExecuteEvents.Execute(m_lastHit.collider.gameObject, baseEvent, ExecuteEvents.submitHandler);
+                }
             }
+            else
+            {
+                m_lineRenderer.startColor = m_defaultStartColor;
+                m_lineRenderer.endColor = m_defaultEndColor;
+            }
+            m_lineRenderer.SetPosition(1, m_lastHit.point);
         }
         else
         {
-            m_lineRenderer.startColor = m_defaultStartColor;
-            m_lineRenderer.endColor = m_defaultEndColor;
+            m_lineRenderer.SetPosition(1, m_hand.transform.position + (m_hand.transform.forward * m_maxRaycastDistance));
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
+            {
+                m_lineRenderer.startColor = m_buttonDownStartColor;
+                m_lineRenderer.endColor = m_buttonDownEndColor;
+            }
+            else
+            {
+                m_lineRenderer.startColor = m_defaultStartColor;
+                m_lineRenderer.endColor = m_defaultEndColor;
+            }
         }
 
         // update line renderer
-        m_lineRenderer.SetPosition(0, m_hand.transform.position + ((transform.right * 0.5f) - (transform.up * 0.3f)));
-        m_lineRenderer.SetPosition(1, m_lastHit.point);
+        m_lineRenderer.SetPosition(0, m_hand.transform.position);
+        
     }
 
     public void QuitButton()

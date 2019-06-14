@@ -456,10 +456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0509dcb49406047afa1623c7140114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hand: {fileID: 0}
+  m_hand: {fileID: 1772313265967231491}
   m_maxRaycastDistance: 20
-  m_buttonDownStartColor: {r: 1, g: 0, b: 0, a: 0}
-  m_buttonDownEndColor: {r: 1, g: 1, b: 0, a: 0}
+  m_buttonDownStartColor: {r: 1, g: 0, b: 0, a: 1}
+  m_buttonDownEndColor: {r: 1, g: 1, b: 0, a: 1}
   m_lineRenderer: {fileID: 5806720059266961619}
 --- !u!1 &1772313265011420283
 GameObject:

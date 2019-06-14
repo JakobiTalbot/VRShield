@@ -77,6 +77,11 @@ public class Projectile : MonoBehaviour
             CollideEnemy(collision);
             return;
         }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            // play hit sound
+            collision.gameObject.GetComponent<Player>().PlayHitSound(1f);
+        }
         if (m_bIsHoming
             || !m_bIsFiring)
             return;
@@ -104,9 +109,6 @@ public class Projectile : MonoBehaviour
         m_scoreManager.AddScore(m_scoreForHittingProjectile + (int)fForce);
         // the lord giveth, but he also taketh away
         Destroy(Instantiate(m_hitParticlePrefab, collision.GetContact(0).point, Quaternion.Euler(Vector3.zero)), 1f);
-        // play hit sound
-        // TODO: set volume based on swing force
-        player.PlayHitSound(fForce / 50f);
         // if shield is parrying
         if (m_player.IsParrying())
         {
@@ -140,7 +142,8 @@ public class Projectile : MonoBehaviour
     private void CollidePlayer(Collision collision)
     {
         m_scoreManager.ResetMultiplier();
-        // dmg player in future
+        // damage player
+        collision.gameObject.GetComponent<Player>().TakeDamage(1);
         Destroy(gameObject);
     }
 }
