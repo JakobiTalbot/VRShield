@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 
     public float m_firstShootTime = 2.0f;
     public float m_shootTime = 10.0f;
-    public float m_timer;
+    private float m_timer;
 
     void Start()
     {

@@ -5,7 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Radar))]
 public class EnemySpawner : MonoBehaviour
 {
-    public float m_spawnTimer = 3.0f;       //the time between enemy spawns
+    public float m_spawnTimer = 10.0f;       //the time between enemy spawns
+
+    public float m_spawnTimeMultiplier = 0.05f;
+    public float m_minimumSpawnTime = 1.0f;
 
     public Radar m_radar;
 
@@ -13,11 +16,13 @@ public class EnemySpawner : MonoBehaviour
     public float m_spawnRadius;     //the radius at which the enemies spawn
     public GameObject m_enemyPrefab;        //reference to the enemy prefab
 
+    private float m_setTimer;       //time used to set the timer with multiplier
     private float m_timer;      //actual timer for enemy spawn
 
     private void Start()
     {
         m_timer = m_spawnTimer;     //set spawn time
+        m_setTimer = m_spawnTimer;
         m_radar = GetComponent<Radar>();
     }
 
@@ -28,7 +33,17 @@ public class EnemySpawner : MonoBehaviour
         if (m_timer <= 0)       //if time has run out
         {
             SpawnEnemy();       //spawn enemy
-            m_timer += m_spawnTimer;        //reset time
+
+            if (m_setTimer > m_minimumSpawnTime)
+            {
+                m_setTimer -= m_spawnTimer * m_spawnTimeMultiplier; //makes timer slightly shorter
+            }
+            if (m_setTimer < m_minimumSpawnTime)
+            {
+                m_setTimer = m_minimumSpawnTime;
+            }
+
+            m_timer += m_setTimer;        //reset time
         }
     }
 
