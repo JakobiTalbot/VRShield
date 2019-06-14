@@ -77,10 +77,10 @@ public class Projectile : MonoBehaviour
             CollideEnemy(collision);
             return;
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (collision.gameObject.CompareTag("Shield"))
         {
             // play hit sound
-            collision.gameObject.GetComponent<Player>().PlayHitSound(1f);
+            FindObjectOfType<Player>().PlayHitSound(1f);
         }
         if (m_bIsHoming
             || !m_bIsFiring)

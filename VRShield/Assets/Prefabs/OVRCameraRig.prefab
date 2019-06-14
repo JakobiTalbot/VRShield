@@ -510,8 +510,8 @@ MonoBehaviour:
   m_fakeShield: {fileID: 1611424254}
   m_livesText: {fileID: 0}
   m_hitProjectileAudioClips:
-  - {fileID: 8300000, guid: 8ab3154a42b30f145ba3caca8e464ca2, type: 3}
   - {fileID: 8300000, guid: 1b1fc22c48e36b74c8026c9bd8e636f6, type: 3}
+  - {fileID: 8300000, guid: 8ab3154a42b30f145ba3caca8e464ca2, type: 3}
   m_hurtAudioClip: {fileID: 8300000, guid: c56937b6f74db0548962e86066f1e587, type: 3}
   m_deathAudioClip: {fileID: 8300000, guid: d53a591983b2d8149ac7ecccbcb93ed9, type: 3}
   m_startingLivesCount: 5

@@ -398,7 +398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -256, y: -307.1}
+  m_AnchoredPosition: {x: -200, y: -356}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &654321249
@@ -477,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200.1}
+  m_AnchoredPosition: {x: 0, y: -249}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &765151680
@@ -514,7 +514,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -472.1}
+  m_AnchoredPosition: {x: 0, y: -521}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &765151682
@@ -592,14 +592,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_blackImage: {fileID: 1467599578}
+  m_scoreNum: {fileID: 1380914634}
+  m_highScoreNum: {fileID: 1482019765}
   m_texts:
-  - {fileID: 654321249}
-  - {fileID: 617021550}
-  - {fileID: 1380914633}
-  - {fileID: 849839322}
-  - {fileID: 1482019764}
-  m_backText: {fileID: 765151680}
+  - {fileID: 654321250}
+  - {fileID: 617021551}
+  - {fileID: 849839323}
+  m_backText: {fileID: 765151682}
   m_crossFadeTime: 2
+  m_scoreLerpSpeed: 0.02
 --- !u!114 &786951507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,7 +763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 256, y: -307.1}
+  m_AnchoredPosition: {x: 200, y: -356}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!20 &1113264743 stripped
@@ -847,7 +848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -256, y: -372.1}
+  m_AnchoredPosition: {x: -200, y: -421}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1467599578
@@ -998,7 +999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 256, y: -372.1}
+  m_AnchoredPosition: {x: 200, y: -421}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1646193902 stripped
@@ -1413,16 +1414,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1113264743}
-    - target: {fileID: 7993366997493316109, guid: c3b608adfb28cf240bebe1724eebe385,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7067897079894208483, guid: c3b608adfb28cf240bebe1724eebe385,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b608adfb28cf240bebe1724eebe385, type: 3}
 --- !u!114 &8245691604955785649 stripped

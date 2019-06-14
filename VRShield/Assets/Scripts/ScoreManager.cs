@@ -30,4 +30,6 @@ public class ScoreManager : MonoBehaviour
     }
 
     public int GetMultiplier() => m_nCurrentMultiplier;
+
+    public int GetScore() => m_nCurrentScore;
 }

@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
             FindObjectOfType<EnemySpawner>().enabled = false;
             foreach (GameObject enemy in FindObjectOfType<Radar>().m_enemies)
                 Destroy(enemy);
-            m_physicsShield.SetActive(false);
+            m_physicsShield.GetComponent<Renderer>().enabled = false;
         }
         else
         {
