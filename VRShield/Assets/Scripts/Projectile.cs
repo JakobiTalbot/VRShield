@@ -146,4 +146,11 @@ public class Projectile : MonoBehaviour
         collision.gameObject.GetComponent<Player>().TakeDamage(1);
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        Radar r = FindObjectOfType<Radar>();
+        if (r)
+            r.RemoveProjectile(gameObject);
+    }
 }

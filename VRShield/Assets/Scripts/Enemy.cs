@@ -28,7 +28,11 @@ public class Enemy : MonoBehaviour
     public void Shoot()
     {
         GameObject projectile = Instantiate(m_projectilePrefab, transform.position, Quaternion.Euler(Vector3.zero));
-        projectile.GetComponent<Projectile>().Fire(Camera.main.transform.position ,this.gameObject);
+        projectile.GetComponent<Projectile>().Fire(Camera.main.transform.position, this.gameObject);
+
+        Radar r = FindObjectOfType<Radar>();
+        if (r)
+            r.AddProjectile(projectile);
     }
     private void OnDestroy()
     {

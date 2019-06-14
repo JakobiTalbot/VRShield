@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public float m_spawnTimer = 10.0f;       //the time between enemy spawns
 
     public float m_spawnTimeMultiplier = 0.05f;
-    public float m_minimumSpawnTime = 1.0f;
+    public float m_minimumSpawnTime = 2.0f;
 
     public Radar m_radar;
 
