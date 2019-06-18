@@ -14,7 +14,7 @@ public class GameOverScreen : MonoBehaviour
     public float m_crossFadeTime = 2f;
     public float m_scoreLerpSpeed = 0.2f;
 
-    private int m_nCurrentScoreValue = 0;
+    private float m_fCurrentScoreValue = 0;
     private bool m_bCanPressBack = false;
     private bool m_bLerpScore = false;
 
@@ -36,10 +36,12 @@ public class GameOverScreen : MonoBehaviour
         if (m_bLerpScore)
         {
             int nScore = FindObjectOfType<ScoreManager>().GetScore();
+            // lerp score
+            m_fCurrentScoreValue = Mathf.Lerp(m_fCurrentScoreValue, nScore, m_scoreLerpSpeed) + (nScore * 0.001f);
             // if reached score
-            if (m_nCurrentScoreValue >= nScore - (int)(nScore * 0.01f))
+            if (m_fCurrentScoreValue >= nScore - (nScore * 0.01f))
             {
-                m_nCurrentScoreValue = nScore;
+                m_fCurrentScoreValue = nScore;
                 // if new high score
                 if (nScore > PlayerPrefs.GetInt("highscore"))
                 {
@@ -50,11 +52,7 @@ public class GameOverScreen : MonoBehaviour
                 CrossFadeBackText();
                 m_bLerpScore = false;
             }
-            else
-            {
-                m_nCurrentScoreValue = (int)Mathf.Lerp(m_nCurrentScoreValue, nScore, m_scoreLerpSpeed);
-            }
-            m_scoreNum.text = m_nCurrentScoreValue.ToString();
+            m_scoreNum.text = ((int)m_fCurrentScoreValue).ToString();
         }
         if (OVRInput.GetDown(OVRInput.Button.Back) && m_bCanPressBack)
             SceneManager.LoadScene(0);
@@ -86,10 +84,8 @@ public class GameOverScreen : MonoBehaviour
     {
         m_texts[1].CrossFadeAlpha(1f, m_crossFadeTime, true);
         m_scoreNum.CrossFadeAlpha(1f, m_crossFadeTime, true);
-        StartScoreLerp();
+        m_bLerpScore = true;
     }
-
-    private void StartScoreLerp() => m_bLerpScore = true;
 
     private void CrossFadeBackText()
     {

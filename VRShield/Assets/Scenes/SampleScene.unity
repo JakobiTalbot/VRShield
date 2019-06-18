@@ -1189,6 +1189,12 @@ PrefabInstance:
       propertyPath: m_pivotPoint
       value: 
       objectReference: {fileID: 2043190529}
+    - target: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
+        type: 3}
+      propertyPath: m_projectileUITokenPrefab
+      value: 
+      objectReference: {fileID: 8436075773352065534, guid: bf0a11c819dda3d4cac7a8c1c71f0bb8,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57001ca5a08c4084ab6f17de9ab95c30, type: 3}
 --- !u!1001 &1772313265044694629
