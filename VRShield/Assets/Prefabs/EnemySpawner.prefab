@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_spawnTimer: 5
+  m_spawnTimeMultiplier: 0.05
+  m_minimumSpawnTime: 2
   m_radar: {fileID: 0}
   m_spawnMinMaxHeight: {x: -1, y: 3}
   m_spawnRadius: 5
@@ -65,6 +67,10 @@ MonoBehaviour:
   m_radarUI: {fileID: 0}
   m_enemies: []
   m_enemyUITokens: []
+  m_projectiles: []
+  m_projectileUITokens: []
   m_enemyUITokenPrefab: {fileID: 8436075773352065534, guid: bf0a11c819dda3d4cac7a8c1c71f0bb8,
+    type: 3}
+  m_projectileUITokenPrefab: {fileID: 8436075773352065534, guid: b719b9c2d81a24647a66691c751d1add,
     type: 3}
   m_pivotPoint: {fileID: 0}
