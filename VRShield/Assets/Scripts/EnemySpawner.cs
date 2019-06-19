@@ -63,6 +63,7 @@ public class EnemySpawner : MonoBehaviour
         //Vector3 spawnPos = new Vector3(tempPos.x, Random.Range(m_spawnMinMaxHeight.x, m_spawnMinMaxHeight.y), tempPos.y);        //puts x y z together
 
         GameObject temp = Instantiate(m_enemyPrefab);       //creates enemy
+        temp.transform.LookAt(FindObjectOfType<Player>().transform.position);
         temp.transform.position = v;     //puts enemy into position
 
         m_radar.AddEnemy(temp);
