@@ -1193,7 +1193,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_projectileUITokenPrefab
       value: 
-      objectReference: {fileID: 8436075773352065534, guid: bf0a11c819dda3d4cac7a8c1c71f0bb8,
+      objectReference: {fileID: 8436075773352065534, guid: b719b9c2d81a24647a66691c751d1add,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57001ca5a08c4084ab6f17de9ab95c30, type: 3}
@@ -1435,6 +1435,37 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1113264743}
+    - target: {fileID: 144729601287004916, guid: c3b608adfb28cf240bebe1724eebe385,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 144729601287004916, guid: c3b608adfb28cf240bebe1724eebe385,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993366997493316110, guid: c3b608adfb28cf240bebe1724eebe385,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: cfcab2f0cf195bb4f94bf393744d072f, type: 2}
+    - target: {fileID: 7993366997493316110, guid: c3b608adfb28cf240bebe1724eebe385,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ce8f78b2b9292484e97f36ad9568fc4f,
+        type: 3}
+    - target: {fileID: 7993366997493316110, guid: c3b608adfb28cf240bebe1724eebe385,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645510664052783674, guid: c3b608adfb28cf240bebe1724eebe385,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b608adfb28cf240bebe1724eebe385, type: 3}
 --- !u!114 &8245691604955785649 stripped
