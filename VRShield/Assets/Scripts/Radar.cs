@@ -64,9 +64,12 @@ public class Radar : MonoBehaviour
             
         }
 
+        EnemySpawner e = GetComponent<EnemySpawner>();
         for(int i = 0; i < m_projectileUITokens.Count; i++)
         {
-            m_projectileUITokens[i].transform.localPosition = new Vector3(m_projectiles[i].transform.position.normalized.x * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, m_projectiles[i].transform.position.normalized.z * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f, 0.0f);
+            //m_projectileUITokens[i].transform.localPosition = new Vector3(m_projectiles[i].transform.position.normalized.x * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, m_projectiles[i].transform.position.normalized.z * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f, 0.0f);
+
+            m_projectileUITokens[i].transform.localPosition = new Vector3((m_projectiles[i].transform.position.x / e.m_spawnRadius) * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, (m_projectiles[i].transform.position.z / e.m_spawnRadius) * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f, 0.0f);
         }
     }
 }
