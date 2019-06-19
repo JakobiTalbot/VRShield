@@ -54,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject temp = Instantiate(m_enemyPrefab);       //creates enemy
         temp.transform.position = spawnLoc;     //puts enemy into position
+        temp.transform.LookAt(FindObjectOfType<Player>().transform.position);
 
         m_radar.AddEnemy(temp);
     }
