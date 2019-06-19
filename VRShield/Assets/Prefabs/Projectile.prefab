@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 60
   m_speedIncreaseWhenParried: 60
-  m_timeToDestroyAfterBlocked: 2
+  m_timeToDestroyAfterBlocked: 1
   m_scoreForKillingEnemy: 100
   m_scoreForHittingProjectile: 50
   m_hitParticlePrefab: {fileID: 6923920892220670304, guid: cd5a421802967f24892b6e533fe70b3b,

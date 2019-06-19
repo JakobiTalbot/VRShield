@@ -37,7 +37,7 @@ public class GameOverScreen : MonoBehaviour
         {
             int nScore = FindObjectOfType<ScoreManager>().GetScore();
             // lerp score
-            m_fCurrentScoreValue = Mathf.Lerp(m_fCurrentScoreValue, nScore, m_scoreLerpSpeed) + (nScore * 0.001f);
+            m_fCurrentScoreValue = Mathf.Lerp(m_fCurrentScoreValue, nScore, m_scoreLerpSpeed);
             // if reached score
             if (m_fCurrentScoreValue >= nScore - (nScore * 0.01f))
             {
