@@ -34,6 +34,10 @@
         half _Metallic;
         fixed4 _Color;
 
+		// dissolve properties
+		sampler2D _DissolveTexture;
+		half _Amount;
+
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
         // #pragma instancing_options assumeuniformscaling
@@ -43,6 +47,11 @@
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
+			// dissolve
+			half dissolve_value = tex2D(_DissolveTexture, IN.uv_MainTex).r;
+			clip(dissolve_value - _Amount);
+			// dissolve outline
+			o.Emission = fixed3(1, 1, 1) * step(dissolve_value - _Amount, 0.05f);
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
             o.Albedo = c.rgb;

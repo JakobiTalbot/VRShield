@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     public GameObject m_hitParticlePrefab;
     public GameObject m_explodeEnemyParticlePrefab;
     public GameObject m_scoreGainPopupPrefab;
+    public Material m_dissolveMaterial;
 
     private GameObject m_projectileOwner;
     private Player m_player;
@@ -20,16 +21,27 @@ public class Projectile : MonoBehaviour
     private bool m_bIsHoming = false;
     private Rigidbody m_rb;
     private ScoreManager m_scoreManager;
+    private bool m_bDissolve = false;
+    private Renderer m_renderer;
+    private float m_fDissolveLerp = 0f;
 
     void Awake()
     {
         m_scoreManager = FindObjectOfType<ScoreManager>();
         m_rb = GetComponent<Rigidbody>();
         m_player = FindObjectOfType<Player>();
+        m_renderer = GetComponent<Renderer>();
+        m_dissolveMaterial.color = m_renderer.material.color;
     }
 
     private void FixedUpdate()
     {
+        if (m_bDissolve)
+        {
+            m_fDissolveLerp += Time.deltaTime / m_timeToDestroyAfterBlocked;
+            // lerp dissolve amount
+            m_renderer.material.SetFloat("_Amount", m_fDissolveLerp);
+        }
         // in case other projectile kills owner
         if (!m_projectileOwner)
             Destroy(gameObject);
@@ -119,6 +131,9 @@ public class Projectile : MonoBehaviour
         else // if shield is hit and not parrying
         {
             m_rb.constraints = RigidbodyConstraints.None;
+            // set dissolve material
+            m_renderer.material = m_dissolveMaterial;
+            m_bDissolve = true;
             Destroy(gameObject, m_timeToDestroyAfterBlocked);
         }
     }

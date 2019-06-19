@@ -118,6 +118,7 @@ MonoBehaviour:
     type: 3}
   m_scoreGainPopupPrefab: {fileID: 3805595713937908122, guid: e92a670dfdd50e24a88fd52e34c9ca45,
     type: 3}
+  m_dissolveMaterial: {fileID: 2100000, guid: a9f9da4eb7d7c00419376ebf7c664535, type: 2}
 --- !u!54 &9153208513728059153
 Rigidbody:
   m_ObjectHideFlags: 0
