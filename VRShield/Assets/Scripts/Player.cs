@@ -17,13 +17,13 @@ public class Player : MonoBehaviour
     public AudioClip m_hurtAudioClip;
     public AudioClip m_deathAudioClip;
     public int m_startingLivesCount = 5;
+    public int m_hitsNeededToBeAbleToParryAgain = 3;
 
     // timer until the parry runs out
     private float m_fParryTimer = 0f;
     private int m_nCurrentLivesCount;
-    // timer until player can parry again
-    private float m_fParryCooldownTimer = 0f;
     private AudioSource m_audioSource;
+    private int m_nHitsSinceLastParry = 0;
 
     private void Awake()
     {
@@ -37,28 +37,26 @@ public class Player : MonoBehaviour
     {
         // decrement timers
         m_fParryTimer -= Time.deltaTime;
-        m_fParryCooldownTimer -= Time.deltaTime;
 
         // parry
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger)
-            && m_fParryCooldownTimer <= 0f)
+            && m_nHitsSinceLastParry >= 3)
         {
             m_fParryTimer = m_parryTime;
-            m_fParryCooldownTimer = m_parryCooldown;
+            m_nHitsSinceLastParry = 0;
         }
+
+        // set bat colour
         if (m_fParryTimer > 0f)
             m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
+        else if (m_nHitsSinceLastParry >= 3)
+            m_physicsShield.GetComponent<Renderer>().material.color = new Color(0, 1, 0);
         else
             m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
 
         m_physicsShield.GetComponent<Rigidbody>().MovePosition(m_fakeShield.transform.position);
         m_physicsShield.GetComponent<Rigidbody>().MoveRotation(m_fakeShield.transform.rotation);
     }
-
-    /// <summary>
-    /// Resets the parry cooldown timer to 0
-    /// </summary>
-    public void ResetParryCooldown() => m_fParryCooldownTimer = 0f;
 
     /// <summary>
     /// Returns the parry state of the player's shield
@@ -71,12 +69,14 @@ public class Player : MonoBehaviour
         return m_fParryTimer > 0f;
     }
 
-    public void PlayHitSound(float fSwingForce)
+    public void PlayHitSound(float fVolume)
     {
         m_audioSource.pitch = Random.Range(0.8f, 1.2f);
-        m_audioSource.volume = fSwingForce;
+        m_audioSource.volume = fVolume;
         m_audioSource.PlayOneShot(m_hitProjectileAudioClips[Random.Range(0, m_hitProjectileAudioClips.Length)]);
     }
+
+    public void IncrementHits() => m_nHitsSinceLastParry++;
 
     public void TakeDamage(int nDamage)
     {

@@ -102,6 +102,7 @@ public class Projectile : MonoBehaviour
     private void CollideShield(Collision collision)
     {
         Player player = FindObjectOfType<Player>();
+        player.IncrementHits();
         float fForce = (player.m_physicsShield.GetComponent<Rigidbody>().angularVelocity.magnitude);
         // artificial velocity
         m_rb.AddForce(collision.GetContact(0).normal * fForce);
@@ -112,8 +113,6 @@ public class Projectile : MonoBehaviour
         // if shield is parrying
         if (m_player.IsParrying())
         {
-            // reset parry cooldown
-            m_player.ResetParryCooldown();
             m_bIsHoming = true;
             GetComponent<ParticleSystem>().Play();
         }
