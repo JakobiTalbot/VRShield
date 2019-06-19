@@ -20,7 +20,6 @@ public class Radar : MonoBehaviour
     public void AddEnemy(GameObject enemy)
     {
         m_enemies.Add(enemy);
-
         GameObject temp = Instantiate(m_enemyUITokenPrefab, m_radarUI.transform);
         m_enemyUITokens.Add(temp);
     }
@@ -35,16 +34,23 @@ public class Radar : MonoBehaviour
 
     public void RemoveEnemy(GameObject enemy)
     {
+        int index = m_enemies.FindIndex((GameObject a) => { return a == enemy; });
+        Destroy(m_enemyUITokens[index]);
+        m_enemyUITokens.RemoveAt(index);
+        
         m_enemies.Remove(enemy);
-        Destroy(m_enemyUITokens[m_enemyUITokens.Count - 1]);
-        m_enemyUITokens.RemoveAt(m_enemyUITokens.Count - 1);
+        //m_enemyUITokens.RemoveAt(m_enemyUITokens.Count - 1);        
     }
 
     public void RemoveProjectile(GameObject projectile)
     {
+        int index = m_projectiles.FindIndex((GameObject a) => { return a == projectile; });
+        Destroy(m_projectileUITokens[index]);
+        m_projectileUITokens.RemoveAt(index);
+
         m_projectiles.Remove(projectile);
-        Destroy(m_projectileUITokens[m_projectileUITokens.Count - 1]);
-        m_enemyUITokens.RemoveAt(m_enemyUITokens.Count - 1);
+        
+        //m_enemyUITokens.RemoveAt(m_projectileUITokens.Count - 1);
     }
 
     private void Update()
