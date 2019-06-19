@@ -13,7 +13,10 @@ public class EnemySpawner : MonoBehaviour
     public Radar m_radar;
 
     public Vector2 m_spawnMinMaxHeight;     //the min and max height of the spawns
+    public Vector2 m_spawnAngleRange = new Vector2(-100, 100 );
+
     public float m_spawnRadius;     //the radius at which the enemies spawn
+
     public GameObject m_enemyPrefab;        //reference to the enemy prefab
 
     private float m_setTimer;       //time used to set the timer with multiplier
@@ -49,12 +52,18 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy()        //spawn the enemy
     {
-        Vector2 tempLoc = Random.insideUnitCircle.normalized * m_spawnRadius;       //find the x and z coord for where to put enemy
-        Vector3 spawnLoc = new Vector3(tempLoc.x, Random.Range(m_spawnMinMaxHeight.x, m_spawnMinMaxHeight.y), tempLoc.y);        //puts x y z together
+        float angle = Random.Range(m_spawnAngleRange.x, m_spawnAngleRange.y) + GameObject.FindGameObjectWithTag("MainCamera").transform.eulerAngles.y;
+
+        Vector3 v = new Vector3();
+        v.x = m_spawnRadius * Mathf.Sin(angle * Mathf.Deg2Rad);
+        v.z = m_spawnRadius * Mathf.Cos(angle * Mathf.Deg2Rad);
+        v.y = Random.Range(m_spawnMinMaxHeight.x, m_spawnMinMaxHeight.y);
+
+        //Vector2 tempPos = Random.insideUnitCircle.normalized * m_spawnRadius;       //find the x and z coord for where to put enemy
+        //Vector3 spawnPos = new Vector3(tempPos.x, Random.Range(m_spawnMinMaxHeight.x, m_spawnMinMaxHeight.y), tempPos.y);        //puts x y z together
 
         GameObject temp = Instantiate(m_enemyPrefab);       //creates enemy
-        temp.transform.position = spawnLoc;     //puts enemy into position
-        temp.transform.LookAt(FindObjectOfType<Player>().transform.position);
+        temp.transform.position = v;     //puts enemy into position
 
         m_radar.AddEnemy(temp);
     }
