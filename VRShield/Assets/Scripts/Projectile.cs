@@ -100,7 +100,8 @@ public class Projectile : MonoBehaviour
 
         m_bIsFiring = false;
         // if projectile hits shield
-        if (collision.gameObject.CompareTag("Shield"))
+        if (collision.gameObject.CompareTag("Shield")
+            && !m_bDissolve)
         {
             CollideShield(collision);
         }

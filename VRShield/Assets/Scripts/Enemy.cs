@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         m_timer = m_firstShootTime;
+        transform.LookAt(FindObjectOfType<Player>().transform);
     }
 
     void Update()
