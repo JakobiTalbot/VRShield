@@ -18,18 +18,22 @@ public class Player : MonoBehaviour
     public AudioClip m_deathAudioClip;
     public int m_startingLivesCount = 5;
     public int m_hitsNeededToBeAbleToParryAgain = 3;
+    public Color m_parryingBatColor = new Color(1, 0, 0, 1);
+    public Color m_parryReadyBatColor = new Color(0, 1, 0, 1);
 
     // timer until the parry runs out
     private float m_fParryTimer = 0f;
     private int m_nCurrentLivesCount;
     private AudioSource m_audioSource;
     private int m_nHitsSinceLastParry = 0;
+    private Color m_startBatColour;
 
     private void Awake()
     {
         m_audioSource = m_physicsShield.GetComponent<AudioSource>();
         m_nCurrentLivesCount = m_startingLivesCount;
         m_livesText.text = m_nCurrentLivesCount.ToString();
+        m_startBatColour = m_physicsShield.GetComponent<Renderer>().materials[1].color;
     }
 
     // Update is called once per frame
@@ -47,12 +51,12 @@ public class Player : MonoBehaviour
         }
 
         // set bat colour
-        if (m_fParryTimer > 0f)
-            m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 0, 0);
-        else if (m_nHitsSinceLastParry >= 3)
-            m_physicsShield.GetComponent<Renderer>().material.color = new Color(0, 1, 0);
+        if (m_fParryTimer > 0f) // if parrying
+            m_physicsShield.GetComponent<Renderer>().materials[1].color = m_parryingBatColor;
+        else if (m_nHitsSinceLastParry >= 3) // if can parry
+            m_physicsShield.GetComponent<Renderer>().materials[1].color = m_parryReadyBatColor;
         else
-            m_physicsShield.GetComponent<Renderer>().material.color = new Color(1, 1, 1);
+            m_physicsShield.GetComponent<Renderer>().materials[1].color = m_startBatColour;
 
         m_physicsShield.GetComponent<Rigidbody>().MovePosition(m_fakeShield.transform.position);
         m_physicsShield.GetComponent<Rigidbody>().MoveRotation(m_fakeShield.transform.rotation);
