@@ -49,9 +49,12 @@ MonoBehaviour:
   m_minimumSpawnTime: 3
   m_radar: {fileID: 0}
   m_spawnMinMaxHeight: {x: -1, y: 3}
+  m_spawnAngleRange: {x: -100, y: 100}
   m_spawnRadius: 5
-  m_enemyPrefab: {fileID: 6870377426679320522, guid: 2fb35203ab5704d4db7e81902b509cc7,
-    type: 3}
+  m_basicEnemyChance: 50
+  m_enemyPrefab:
+  - {fileID: 6870377426679320522, guid: 2fb35203ab5704d4db7e81902b509cc7, type: 3}
+  - {fileID: 6870377426679320522, guid: ccf7d7bef6b78c344ad4f4ea0b4d808e, type: 3}
 --- !u!114 &5892329689699212471
 MonoBehaviour:
   m_ObjectHideFlags: 0

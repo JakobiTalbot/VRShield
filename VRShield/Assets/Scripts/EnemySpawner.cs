@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [RequireComponent(typeof(Radar))]
 public class EnemySpawner : MonoBehaviour
@@ -17,7 +18,9 @@ public class EnemySpawner : MonoBehaviour
 
     public float m_spawnRadius;     //the radius at which the enemies spawn
 
-    public GameObject m_enemyPrefab;        //reference to the enemy prefab
+    [Range(0,100)]
+    public int m_basicEnemyChance = 50;
+    public GameObject[] m_enemyPrefab = new GameObject[2];        //reference to the enemy prefab
 
     private float m_setTimer;       //time used to set the timer with multiplier
     private float m_timer;      //actual timer for enemy spawn
@@ -62,9 +65,18 @@ public class EnemySpawner : MonoBehaviour
         //Vector2 tempPos = Random.insideUnitCircle.normalized * m_spawnRadius;       //find the x and z coord for where to put enemy
         //Vector3 spawnPos = new Vector3(tempPos.x, Random.Range(m_spawnMinMaxHeight.x, m_spawnMinMaxHeight.y), tempPos.y);        //puts x y z together
 
-        GameObject temp = Instantiate(m_enemyPrefab);       //creates enemy
-        temp.transform.position = v;     //puts enemy into position
+        GameObject temp;
+
+        if (Random.Range(0, 100) < m_basicEnemyChance)
+        {
+            temp = Instantiate(m_enemyPrefab[0]);       //creates enemy
+        }
+        else
+        {
+            temp = Instantiate(m_enemyPrefab[1]);       //creates enemy
+        }
 
         m_radar.AddEnemy(temp);
+        temp.transform.position = v;     //puts enemy into position
     }
 }

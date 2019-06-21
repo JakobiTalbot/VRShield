@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingEnemy : MonoBehaviour
+public class MovingEnemy : BaseEnemy
 {
-    public GameObject m_projectilePrefab;
     public float m_movementSlerpSpeed = 1f;
 
-    public float m_firstShootTime = 2.0f;
-    public float m_shootTime = 10.0f;
-    private float m_timer;
     private Vector3 m_v3DestinationPoint;
     private Vector3 m_v3StartPoint;
     private Vector2 m_v2MoveAngleRange;
@@ -30,7 +26,7 @@ public class MovingEnemy : MonoBehaviour
         GetNewMovementPoint();
     }
 
-    void Update()
+    override protected void Update()
     {
         m_timer -= Time.deltaTime;
         if (m_timer <= 0)
@@ -50,16 +46,6 @@ public class MovingEnemy : MonoBehaviour
         transform.position = (Vector3.Slerp(m_v3StartPoint, m_v3DestinationPoint, m_fCurrentSlerp));
         // face player
         transform.LookAt(FindObjectOfType<Player>().transform);
-    }
-
-    public void Shoot()
-    {
-        GameObject projectile = Instantiate(m_projectilePrefab, transform.position, Quaternion.Euler(Vector3.zero));
-        projectile.GetComponent<Projectile>().Fire(Camera.main.transform.position, this.gameObject);
-
-        Radar r = FindObjectOfType<Radar>();
-        if (r)
-            r.AddProjectile(projectile);
     }
 
     private void GetNewMovementPoint()

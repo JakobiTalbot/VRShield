@@ -404,6 +404,11 @@ PrefabInstance:
       propertyPath: m_minimumSpawnTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8593958438279977598, guid: 57001ca5a08c4084ab6f17de9ab95c30,
+        type: 3}
+      propertyPath: m_radar
+      value: 
+      objectReference: {fileID: 2066217927}
     - target: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
         type: 3}
       propertyPath: m_radarUI
@@ -664,6 +669,18 @@ PrefabInstance:
       objectReference: {fileID: 186860425}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b608adfb28cf240bebe1724eebe385, type: 3}
+--- !u!114 &2066217927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
+    type: 3}
+  m_PrefabInstance: {fileID: 1075735609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12891120d01d72546b150943da350114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2105783240
 PrefabInstance:
   m_ObjectHideFlags: 0
