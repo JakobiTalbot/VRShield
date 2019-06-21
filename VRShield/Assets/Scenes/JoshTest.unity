@@ -270,12 +270,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 15067002}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &220004396 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8245691604935855320, guid: c3b608adfb28cf240bebe1724eebe385,
-    type: 3}
-  m_PrefabInstance: {fileID: 1805098433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &272448651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7993366997493316108, guid: c3b608adfb28cf240bebe1724eebe385,
@@ -416,12 +410,6 @@ PrefabInstance:
       objectReference: {fileID: 272448651}
     - target: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
         type: 3}
-      propertyPath: m_enemyUITokenPrefab
-      value: 
-      objectReference: {fileID: 8436075773352065534, guid: bf0a11c819dda3d4cac7a8c1c71f0bb8,
-        type: 3}
-    - target: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
-        type: 3}
       propertyPath: m_player
       value: 
       objectReference: {fileID: 122490059}
@@ -429,13 +417,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_pivotPoint
       value: 
-      objectReference: {fileID: 220004396}
-    - target: {fileID: 5892329689699212471, guid: 57001ca5a08c4084ab6f17de9ab95c30,
-        type: 3}
-      propertyPath: m_projectileUITokenPrefab
-      value: 
-      objectReference: {fileID: 8436075773352065534, guid: b719b9c2d81a24647a66691c751d1add,
-        type: 3}
+      objectReference: {fileID: 122490059}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57001ca5a08c4084ab6f17de9ab95c30, type: 3}
 --- !u!1001 &1131712160

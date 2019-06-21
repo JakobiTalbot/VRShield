@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public float m_spawnTimeMultiplier = 0.05f;
     public float m_minimumSpawnTime = 2.0f;
 
-    public Radar m_radar;
+    Radar m_radar;
 
     public Vector2 m_spawnMinMaxHeight;     //the min and max height of the spawns
     public Vector2 m_spawnAngleRange = new Vector2(-100, 100 );
@@ -20,7 +20,8 @@ public class EnemySpawner : MonoBehaviour
 
     [Range(0,100)]
     public int m_basicEnemyChance = 50;
-    public GameObject[] m_enemyPrefab = new GameObject[2];        //reference to the enemy prefab
+    public GameObject m_enemyPrefab;        //reference to the enemy prefab
+    public GameObject m_movingEnemyPrefab;
 
     private float m_setTimer;       //time used to set the timer with multiplier
     private float m_timer;      //actual timer for enemy spawn
@@ -69,11 +70,11 @@ public class EnemySpawner : MonoBehaviour
 
         if (Random.Range(0, 100) < m_basicEnemyChance)
         {
-            temp = Instantiate(m_enemyPrefab[0]);       //creates enemy
+            temp = Instantiate(m_enemyPrefab);       //creates enemy
         }
         else
         {
-            temp = Instantiate(m_enemyPrefab[1]);       //creates enemy
+            temp = Instantiate(m_movingEnemyPrefab);       //creates enemy
         }
 
         m_radar.AddEnemy(temp);

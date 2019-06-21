@@ -13,6 +13,7 @@ public class Radar : MonoBehaviour
     public List<GameObject> m_projectileUITokens;
 
     public GameObject m_enemyUITokenPrefab;
+    public GameObject m_movingEnemyUITokenPrefab;
     public GameObject m_projectileUITokenPrefab;
 
     public GameObject m_pivotPoint;
@@ -20,7 +21,18 @@ public class Radar : MonoBehaviour
     public void AddEnemy(GameObject enemy)
     {
         m_enemies.Add(enemy);
-        GameObject temp = Instantiate(m_enemyUITokenPrefab, m_radarUI.transform);
+
+        GameObject temp;
+
+        if(enemy.GetComponent<Enemy>() != null)
+        {
+            temp = Instantiate(m_enemyUITokenPrefab, m_radarUI.transform);
+        }
+        else
+        {
+            temp = Instantiate(m_movingEnemyUITokenPrefab, m_radarUI.transform);
+        }
+
         m_enemyUITokens.Add(temp);
     }
 
