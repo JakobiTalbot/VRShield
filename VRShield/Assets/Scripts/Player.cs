@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         m_audioSource = m_physicsShield.GetComponent<AudioSource>();
         m_nCurrentLivesCount = m_startingLivesCount;
         m_livesText.text = m_nCurrentLivesCount.ToString();
-        m_startBatColour = m_physicsShield.GetComponent<Renderer>().materials[1].color;
+        m_startBatColour = m_physicsShield.GetComponent<Renderer>().materials[1].GetColor("_EmissionColor");
     }
 
     // Update is called once per frame
@@ -52,11 +52,11 @@ public class Player : MonoBehaviour
 
         // set bat colour
         if (m_fParryTimer > 0f) // if parrying
-            m_physicsShield.GetComponent<Renderer>().materials[1].color = m_parryingBatColor;
+            m_physicsShield.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", m_parryingBatColor);
         else if (m_nHitsSinceLastParry >= 3) // if can parry
-            m_physicsShield.GetComponent<Renderer>().materials[1].color = m_parryReadyBatColor;
+            m_physicsShield.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", m_parryReadyBatColor);
         else
-            m_physicsShield.GetComponent<Renderer>().materials[1].color = m_startBatColour;
+            m_physicsShield.GetComponent<Renderer>().materials[1].SetColor("_EmissionColor", m_startBatColour);
 
         m_physicsShield.GetComponent<Rigidbody>().MovePosition(m_fakeShield.transform.position);
         m_physicsShield.GetComponent<Rigidbody>().MoveRotation(m_fakeShield.transform.rotation);

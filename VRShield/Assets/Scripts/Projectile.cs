@@ -13,6 +13,8 @@ public class Projectile : MonoBehaviour
     public GameObject m_explodeEnemyParticlePrefab;
     public GameObject m_scoreGainPopupPrefab;
     public Material m_dissolveMaterial;
+    public GameObject m_enemyShotEffect;
+    public GameObject m_playerShotEffect;
 
     private GameObject m_projectileOwner;
     private Player m_player;
@@ -38,7 +40,7 @@ public class Projectile : MonoBehaviour
     {
         if (m_bDissolve)
         {
-            m_fDissolveLerp += Time.deltaTime / m_timeToDestroyAfterBlocked;
+            m_fDissolveLerp += Time.fixedDeltaTime / m_timeToDestroyAfterBlocked;
             // lerp dissolve amount
             m_renderer.material.SetFloat("_Amount", m_fDissolveLerp);
         }
@@ -49,7 +51,10 @@ public class Projectile : MonoBehaviour
         if (m_bIsFiring)
             m_rb.velocity = m_v3TargetDirection * m_speed * Time.deltaTime;
         else if (m_bIsHoming)
+        {
             m_rb.velocity += (m_projectileOwner.transform.position - transform.position).normalized * (m_speed / 8f) * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(m_rb.velocity.normalized);
+        }
     }
 
     /// <summary>
@@ -128,12 +133,16 @@ public class Projectile : MonoBehaviour
         {
             m_bIsHoming = true;
             GetComponent<ParticleSystem>().Play();
+            m_playerShotEffect.SetActive(true);
+            m_enemyShotEffect.SetActive(false);
+            GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
         }
         else // if shield is hit and not parrying
         {
             m_rb.constraints = RigidbodyConstraints.None;
             // set dissolve material
             m_renderer.material = m_dissolveMaterial;
+            m_enemyShotEffect.SetActive(false);
             m_bDissolve = true;
             Destroy(gameObject, m_timeToDestroyAfterBlocked);
         }

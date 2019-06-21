@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: da945af8debfca14ea6e658040de2c36
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 788022608f81fc9489dcdb04228b8746
+    path: Assets/Scenes/XavierTest.unity
+    guid: b44d9321b0d58b740b26a13703a2bcec
   m_configObjects: {}

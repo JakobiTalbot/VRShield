@@ -52,7 +52,7 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = fixed4(1, 0.29, 0, 1);
 				// dissolve
 				half dissolve_value = tex2D(_DissolveTexture, i.uv).r;
 				clip(dissolve_value - _Amount);

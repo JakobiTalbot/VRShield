@@ -144,6 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3471414201741587122}
+  - component: {fileID: 4928607401049632898}
   m_Layer: 0
   m_Name: PS_ShotPlayer
   m_TagString: Untagged
@@ -167,6 +168,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4928607401049632898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184524484789418667}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20030698, y: 0.17367554, z: 0.7192625}
+  m_Center: {x: -0.0039877407, y: 0.010913014, z: 0.0034256577}
 --- !u!1 &5336432773659877444
 GameObject:
   m_ObjectHideFlags: 0

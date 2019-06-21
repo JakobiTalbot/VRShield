@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 400361925272556805}
   - component: {fileID: 1922138140215661734}
   - component: {fileID: 2169947605619724686}
-  - component: {fileID: 4941374254595347087}
+  - component: {fileID: 171151182986763392}
   m_Layer: 0
   m_Name: PhysicsShield
   m_TagString: Shield
@@ -193,8 +193,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!64 &4941374254595347087
-MeshCollider:
+--- !u!136 &171151182986763392
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -203,7 +203,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a803654d2bd530747bfb4eac07b79f88, type: 3}
+  m_Radius: 0.06728096
+  m_Height: 1.4725369
+  m_Direction: 1
+  m_Center: {x: -1.4666597e-10, y: 0.011452079, z: 1.6398368e-17}

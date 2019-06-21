@@ -47,11 +47,10 @@ MonoBehaviour:
   m_spawnTimer: 6
   m_spawnTimeMultiplier: 0.01
   m_minimumSpawnTime: 3
-  m_radar: {fileID: 0}
   m_spawnMinMaxHeight: {x: -1, y: 3}
   m_spawnAngleRange: {x: -100, y: 100}
   m_spawnRadius: 5
-  m_basicEnemyChance: 50
+  m_basicEnemyChance: 95
   m_enemyPrefab: {fileID: 6870377426679320522, guid: 2fb35203ab5704d4db7e81902b509cc7,
     type: 3}
   m_movingEnemyPrefab: {fileID: 6870377426679320522, guid: ccf7d7bef6b78c344ad4f4ea0b4d808e,
@@ -75,7 +74,8 @@ MonoBehaviour:
   m_projectileUITokens: []
   m_enemyUITokenPrefab: {fileID: 8436075773352065534, guid: bf0a11c819dda3d4cac7a8c1c71f0bb8,
     type: 3}
-  m_movingEnemyUITokenPrefab: {fileID: 0}
+  m_movingEnemyUITokenPrefab: {fileID: 8436075773352065534, guid: 5374b1f582879fc4e957873e401ab6a6,
+    type: 3}
   m_projectileUITokenPrefab: {fileID: 8436075773352065534, guid: b719b9c2d81a24647a66691c751d1add,
     type: 3}
   m_pivotPoint: {fileID: 0}
