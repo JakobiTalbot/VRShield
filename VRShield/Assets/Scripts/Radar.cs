@@ -73,7 +73,8 @@ public class Radar : MonoBehaviour
         {
             //m_enemyUITokens[i].transform.position = new Vector3(m_enemies[i].transform.position.x * (m_radarUI.transform.lossyScale.x * 0.5f), m_enemies[i].transform.position.z * (m_radarUI.transform.lossyScale.z * 0.5f), 0).normalized;
             m_enemyUITokens[i].transform.localPosition = new Vector3(m_enemies[i].transform.position.normalized.x * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, m_enemies[i].transform.position.normalized.z * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f , 0.0f);  //m_enemies[i].transform.position.normalized * m_radarUI.transform.lossyScale.x;
-            m_enemyUITokens[i].transform.eulerAngles = new Vector3(0, 0, -m_enemies[i].transform.rotation.eulerAngles.y);
+            m_enemyUITokens[i].transform.eulerAngles = new Vector3(m_enemyUITokens[i].transform.eulerAngles.x, m_enemyUITokens[i].transform.eulerAngles.y, -m_enemies[i].transform.rotation.eulerAngles.y);
+            //m_enemyUITokens[i].transform.LookAt(m_radarUI.transform,);
         }
 
         EnemySpawner e = GetComponent<EnemySpawner>();
@@ -82,7 +83,7 @@ public class Radar : MonoBehaviour
             //m_projectileUITokens[i].transform.localPosition = new Vector3(m_projectiles[i].transform.position.normalized.x * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, m_projectiles[i].transform.position.normalized.z * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f, 0.0f);
 
             m_projectileUITokens[i].transform.localPosition = new Vector3((m_projectiles[i].transform.position.x / e.m_spawnRadius) * m_radarUI.GetComponent<RectTransform>().rect.width * 0.5f, (m_projectiles[i].transform.position.z / e.m_spawnRadius) * m_radarUI.GetComponent<RectTransform>().rect.height * 0.5f, 0.0f);
-            m_projectileUITokens[i].transform.eulerAngles = new Vector3(0, 0, -m_projectiles[i].transform.rotation.eulerAngles.y);
+            m_projectileUITokens[i].transform.eulerAngles = new Vector3(m_projectileUITokens[i].transform.eulerAngles.x, m_projectileUITokens[i].transform.eulerAngles.y, -m_projectiles[i].transform.rotation.eulerAngles.y);
         }
     }
 }
